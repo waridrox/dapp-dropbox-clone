@@ -1,11 +1,25 @@
 pragma solidity ^0.5.0;
 
 contract DStorage {
+  //public type to access this variable outside of the smart contract
   // Name
-  // Number of files
+  string public name = 'DStorage';
+
+  // Number of files - each file is a key-val pair with key_id and file hash
   // Mapping fileId=>Struct 
+  mapping( uint => File ) public files;
 
   // Struct
+  struct File {
+    uint fileId;
+    string fileHash;
+    uint fileSize;
+    string fileType;
+    string fileName;
+    string fileDescription;
+    uint uploadTime;
+    address payable uploader;
+  }
 
 
   // Event
