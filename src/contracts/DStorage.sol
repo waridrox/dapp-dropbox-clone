@@ -4,10 +4,11 @@ contract DStorage {
   //public type to access this variable outside of the smart contract
   // Name
   string public name = 'DStorage';
+  uint public fileCount = 0;
 
   // Number of files - each file is a key-val pair with key_id and file hash
   // Mapping fileId=>Struct 
-  mapping( uint => File ) public files;
+  mapping(uint => File) public files;
 
   // Struct
   struct File {
@@ -28,10 +29,11 @@ contract DStorage {
   }
 
   // Upload File function
-  function uploadFile() {
+  function uploadFile(string memory _fileHash, uint _fileSize, string memory _fileType, string memory _fileName, string memory _fileDescription) public {
 
-    //creating a test file 
-    files[1] = File(1, 'xyzabc', 2048, 'Testing123', 'Ok ok fellas', 19203854, 0x0);
+    fileCount++;
+    //creating a file object
+    files[fileCount] = File(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender); //now => timestamp | msg.sender => address of caller
     // Make sure the file hash exists
 
     // Make sure file type exists
