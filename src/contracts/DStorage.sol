@@ -23,12 +23,15 @@ contract DStorage {
 
 
   // Event
-
+  //upload and save the file
   constructor() public {
   }
 
   // Upload File function
+  function uploadFile() {
 
+    //creating a test file 
+    files[1] = File(1, 'xyzabc', 2048, 'Testing123', 'Ok ok fellas', 19203854, 0x0);
     // Make sure the file hash exists
 
     // Make sure file type exists
@@ -47,5 +50,6 @@ contract DStorage {
     // Add File to the contract
 
     // Trigger an event
+  }
 
 }
