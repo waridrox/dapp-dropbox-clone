@@ -16,12 +16,27 @@ class App extends Component {
 
   async loadWeb3() {
     //Setting up Web3
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum) 
+      await window.ethereum.enable()
+    }
+    else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider) 
+    }
+    else {
+      window.alert('Non-ethereum browser detected. Try using MetaMask!')
+    }
   }
 
   async loadBlockchainData() {
     //Declare Web3
+    const web3 = window.web3
+    console.log(web3)
 
     //Load account
+    const accounts = await web3.eth.getAccounts()
+    console.log(accounts)
+    this.setState({account: accounts[0]})
 
     //Network ID
 
@@ -62,6 +77,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: false
     }
 
     //Bind functions
