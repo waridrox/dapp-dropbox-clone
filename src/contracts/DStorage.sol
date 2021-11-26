@@ -24,6 +24,17 @@ contract DStorage {
 
 
   // Event
+  event FileUploaded (
+    uint fileId,
+    string fileHash,
+    uint fileSize,
+    string fileType,
+    string fileName,
+    string fileDescription,
+    uint uploadTime,
+    address payable uploader
+  );
+
   //upload and save the file
   constructor() public {
   }
@@ -53,6 +64,7 @@ contract DStorage {
     files[fileCount] = File(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender); //now => timestamp | msg.sender => address of caller
 
     // Trigger an event
+    emit FileUploaded(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
   }
 
 }
