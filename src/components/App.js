@@ -111,11 +111,22 @@ class App extends Component {
       if (this.state.type === "") {
         this.setState({ type: 'none' })
       }
-    })
 
+      //Uploading the file to blockchain
 
       //Call smart contract uploadFile function 
-
+      this.state.dstorage.methods.uploadFile(result[0].hash, result[0].size, this.state.type, this.state.name, this.state.description).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.setState({
+          loading: false,
+          type: null,
+          name: null
+        })
+        window.location.reload() 
+      }).on('error', (e) => {
+        window.alert('error')
+        this.setState({ loading: false })
+      })
+    })
   }
 
   //Set states
