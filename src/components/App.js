@@ -94,13 +94,25 @@ class App extends Component {
     console.log('Submitting file to IPFS...');
 
     //Add file to the IPFS
+    ipfs.add(this.state.buffer, (error, result) => {
+      console.log('IPFS result: ', result)
 
       //Check If error
         //Return error
+      if (error) {
+        console.error(error)
+        return
+      }
 
       //Set state to loading
+      this.setState({ loading: true })
 
       //Assign value for the file without extension
+      if (this.state.type === "") {
+        this.setState({ type: 'none' })
+      }
+    })
+
 
       //Call smart contract uploadFile function 
 
